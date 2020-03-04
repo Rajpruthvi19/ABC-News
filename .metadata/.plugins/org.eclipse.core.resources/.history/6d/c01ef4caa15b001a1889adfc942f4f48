@@ -1,0 +1,48 @@
+package AbcNews1.ABCproject;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.annotations.Test;
+
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
+
+public class ABCTEST {
+public AppiumDriver<MobileElement> driver;
+	
+	@Test
+	public void desiredCapabilities() throws MalformedURLException 
+	{
+		try {
+		DesiredCapabilities capabilities= new DesiredCapabilities();
+		capabilities.setCapability("platformName" , "Android");
+		capabilities.setCapability("platformVersion" , "9");
+		capabilities.setCapability("deviceName" , "988b5143424258595730");
+		capabilities.setCapability("appPackage" , "com.abc.abcnews");
+		capabilities.setCapability("appActivity" , "com.abc.abcnews.ui.StartActivity");
+		capabilities.setCapability("noReset" , "false");
+		driver= new AndroidDriver<MobileElement>(new URL ("http://0.0.0.0:4723/wd/hub"),capabilities);
+		Thread.sleep(3000);
+	} catch(Exception e)
+		{
+		System.out.println(e);
+		}
+
+}
+	public void splashscreen ()
+	{
+		try {
+		MobileElement el1 = (MobileElement) driver.findElementById("com.abc.abcnews:id/build_my_experience_text");
+		el1.click();
+		driver.findElement(By.xpath("//*[@text='Coronavirus']")).click();
+		Thread.sleep(5000);
+		driver.findElement(By.id("com.abc.abcnews:id/onboarding_continue_text")).click();
+		driver.findElement(By.id("android:id/button1")).click();
+		driver.findElement(By.id("com.android.packageinstaller:id/permission_allow_button")).click();
+		driver.findElement(By.id("com.abc.abcnews:id/featured_content_title")).click();
+	}
+}
